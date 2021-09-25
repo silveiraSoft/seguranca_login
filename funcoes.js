@@ -1,90 +1,82 @@
-
-/*
-function encriptar(dado){
-    return CryptoJS.AES.encrypt(dado, chaveJs);
+function Asc(String) {
+	return String.charCodeAt(0);
 }
 
-function desencriptar(dado){
-    return CryptoJS.AES.decrypt(dado, chaveJs);
+function Chr(AsciiNum) {
+	return String.fromCharCode(AsciiNum)
 }
-*/
-function encriptar(dados){
+
+function encriptar(texto) {
 	let mensx = '';
 	let l;
 	let i;
 	let j = 0;
-    //ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
-	let ch = chaveJs;
-    const lchaveJs = chaveJs.length;
-    const ldado = dados.length;
-	for (i = 0; i < ldado; i++){
+	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
+	let ch = chavePhp;
+	const lchavePhp = chavePhp.length;
+	const ldado = texto.length;
+	for (i = 0; i < ldado; i++) {
 		j++;
-		l = (Asc(dados.substr(i,1))+(Asc(ch.substr(j,1))));
-		if (j == lchaveJs){
+		l = (Asc(texto.substr(i, 1)) + (Asc(ch.substr(j, 1))));
+		if (j == lchavePhp) {
 			j = 1;
 		}
-		if (l > 255){
+		if (l > 255) {
 			l -= 256;
 		}
 		mensx += (Chr(l));
+		console.log("i: " + i + " | " + "l: " + l + " carater: " + Chr(l));
 	}
-	return mensx; //document.getElementById("1").value=mensx;
+	return mensx;
 }
-function descriptar(dados){
+
+function descriptar(texto) {
 	let mensx = '';
 	let l;
 	let i;
 	let j = 0;
-	let ch = chaveJs;
+	let ch = chavePhp;
 	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
-    const lchaveJs = chaveJs.length;
-    const ldado = dados.length;
-    for (i = 0; i < dados.length; i++){
+	const lchavePhp = chavePhp.length;
+	const ldado = texto.length;
+	for (i = 0; i < ldado; i++) {
 		j++;
-		l=(Asc(dados.substr(i,1))-(Asc(ch.substr(j,1))));
-		if (j == lchaveJs){
+		l = (Asc(texto.substr(i, 1)) - (Asc(ch.substr(j, 1))));
+		if (j == lchavePhp) {
 			j = 1;
 		}
-		if (l < 0){
+		if (l < 0) {
 			l += 256;
 		}
 		mensx += (Chr(l));
 	}
-	return mensx;//document.getElementById("2").value=mensx;
+	return mensx;
 }
 
-function Asc(String){
-	return String.charCodeAt(0);
+function mostrarDadoNormal(dado) {
+	console.log("Dado normal: " + dado);
+	return dado;
 }
 
-function Chr(AsciiNum){
-	return String.fromCharCode(AsciiNum)
+function mostrarDadoEncriptado(dado) {
+	const dadoEncriptado = encriptar(dado);
+	console.log("Dado original encriptado: " + dadoEncriptado);
+	return dadoEncriptado;
 }
 
-function mostrarDadoNormal(dado){
-    console.log("Dado normal: " + dado);
-    return dado;
-}
-
-function mostrarDadoEncriptado(dado){
-    const dadoEncriptado = encriptar(dado);
-    console.log("Dado original encriptado: " + dadoEncriptado);
-    return dadoEncriptado;
-}
-
-function mostrarDadoDescriptado(dado){
-    const dadoOriginal = descriptar(dado);
-    console.log("Dado original desencriptado: " + dadoOriginal);
-    return dadoOriginal;
+function mostrarDadoDescriptado(dado) {
+	const dadoOriginal = descriptar(dado);
+	console.log("Dado original desencriptado: " + dadoOriginal);
+	return dadoOriginal;
 }
 
 const btnAcessar = document.querySelector('#acessar');
 
 btnAcessar.addEventListener('click', () => {
-    const senha = document.getElementById('senha').value;
-    let dado = mostrarDadoNormal(senha);
-    dado = mostrarDadoEncriptado(dado);
-    mostrarDadoDescriptado(dado);
+	const senha = document.getElementById('senha').value;
+	let dado = mostrarDadoNormal(senha);
+	dado = mostrarDadoEncriptado(dado);
+	mostrarDadoDescriptado(dado);
 })
 
 
