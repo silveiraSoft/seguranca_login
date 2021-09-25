@@ -28,7 +28,7 @@ function encriptar(texto) {
 		}
 		mensx += (Chr(l));
 		vetorAscii.push(l);
-		console.log("i: " + i + " | " + "l: " + l + " carater: " + l);
+		//console.log("i: " + i + " | " + "l: " + l + " carater: " + l);
 	}
 	mensx = vetorAscii.join(',');
 	return mensx;

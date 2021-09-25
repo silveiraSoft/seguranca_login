@@ -10,7 +10,7 @@ btnAcessar.addEventListener('click', () => {
         url: 'login.php',
         type: 'POST',
         data: { dadoEncriptado: dadoEncriptado },
-        dataType: "josn",
+        dataType: "json",
         success: function (result) {
             // Retorno se tudo ocorreu normalmente
             console.log("Resultado Ajax, dado encriptado: " + dadoEncriptado);

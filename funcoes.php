@@ -76,9 +76,9 @@ function encriptar(string $texto): string
 			$l -= 256;
 		}
 		//var_dump($l);
-		echo "i: " . $i . " | " . "l: " . $l . " carater: " . $l . "<br>";
+		//echo "i: " . $i . " | " . "l: " . $l . " carater: " . $l . "<br>";
 		$mensx .= (chr($l));
-		echo $mensx . "<br>";
+		//echo $mensx . "<br>";
 		$asciisEncriptados[] = $l;
 		//$mensx += unichr((int)$l);
 	}
@@ -100,21 +100,25 @@ function descriptar(string $texto): string
 	if (!is_array($listAscci)) {
 		return '';
 	}
-	$mensx = '';
 	$j = 0;
 	$ch = $chavePhp;
+	$mensx = '';
 	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
 	$lchavePhp = strlen($chavePhp);
 	$ldado = count($listAscci);
 	for ($i = 0; $i < $ldado; $i++) {
 		$j++;
 		$l = ((int)$listAscci[$i] - (Asc(substr($ch, $j, 1))));
+
 		if ($j == $lchavePhp) {
 			$j = 1;
 		}
+
 		if ($l < 0) {
 			$l += 256;
 		}
+
+		//return $l;
 		//echo "i: " . $i . " | " . "l: " . $l . " carater: " . chr($l) . "<br>";
 		$mensx .= (chr($l));
 	}

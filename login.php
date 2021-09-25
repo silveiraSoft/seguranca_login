@@ -1,10 +1,16 @@
 <?php
 
-//session_start();
 require_once 'funcoes.php';
-//echo $_POST['dadoEncriptado'];
-//exit();
+$senha = filter_input(INPUT_POST, 'dadoEncriptado', FILTER_SANITIZE_STRING);
+$dadoDescritadoAjax = descriptar($senha);
 
-$dadoDescritadoAjax = descriptar(filter_input(INPUT_POST, 'dadoEncriptado', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-//echo $dadoDescritadoAjax;
-echo json_encode($dadoDescritadoAjax, true);
+$result = utf8_encode($dadoDescritadoAjax);
+
+if ($result == "NÁPOLES") {
+    $result = "Sessão iniciada com senha: " . $result;
+    echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    exit();
+}
+$result = "Sessão não iniciada com senha: " . $result;
+echo json_encode($result, JSON_UNESCAPED_UNICODE);
+exit();
