@@ -2,13 +2,6 @@
 
 //session_start();
 require_once "funcoes.php";
-criarChaveJSPHP();
-echo "<hr>";
-$encriptado = encriptar("adalberto");
-echo "<pre>";
-echo "encriptado adalberto:" . $encriptado;
-echo "<pre>";
-echo "desencriptado:" . descriptar($encriptado);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +14,29 @@ echo "desencriptado:" . descriptar($encriptado);
 </head>
 
 <body>
-    <input type="password" name="senha" id="senha">
-    <input name="acessar" id="acessar" class="btn btn-primary" type="button" value="Acessar">
     <!--
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
     -->
+    <div>
+        <?php
+        criarChaveJSPHP();
+        echo "<hr>";
+        $texto = "NÁPOLES";
+        $encriptado = encriptar($texto);
+        echo "<pre>";
+        echo "encriptado {$texto}:" . $encriptado;
+        echo "<pre>";
+        echo "desencriptado:" . descriptar($encriptado);
+        require_once 'view.login.php';
+        //$variavelPhp = "<script>document.write(chavePhp)</script>" ?? '';
+        //$variavelPhp = "<script>sessionStorage.getItem('chavePhpsession')</script>" ?? '';
+        //echo 'Olá' . $variavelphp ?? '';
+        ?>
+    </div>
+      
     <script type="text/javascript" src="funcoes.js"></script>
+    <script type="text/javascript" src="login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 
 </html>

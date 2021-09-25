@@ -1,15 +1,14 @@
 <?php
-
 function obterChavePHP(): string
 {
-	if (!isset($_COOKIE["PHPSESSID"])) {
+	if (!isset($_COOKIE["PHPSESSID"]) || !isset($_SESSION['teste'])) {
 		session_start();
 	}
 	if (!isset($_SESSION['teste'])) {
 		$_SESSION['teste'] = sha1(time()) . sha1(microtime());
 	}
+	//return $_SESSION['teste'];
 	$chavePhp = $_SESSION['teste'] ?? null;
-	echo "chavePhp:" . $chavePhp . "<br>";
 	return $chavePhp;
 }
 
@@ -17,11 +16,13 @@ function criarChaveJSPHP()
 {
 	echo "<br>Criando chave JS e PHP<br>";
 	$chavePhp = obterChavePHP();
+	echo "chavePhp:" . $chavePhp . "<br>";
 
 	if (isset($chavePhp)) {
 ?>
 		<script>
 			var chavePhp = '<?php echo $chavePhp ?? 'Erro na chave php'; ?>';
+			sessionStorage.setItem('chavePhpsession', chavePhp);
 			console.log("Chave js com o valor vindo da sessão do php com nome valor: chavePhp = " + chavePhp);
 		</script>
 <?php
@@ -31,9 +32,9 @@ function criarChaveJSPHP()
 function Asc(string $dado): int
 {
 	return ord($dado);
-	//return mb_ord("A", "UTF-8")
 }
 
+/*
 function utf8CharCodeAt($str, $index)
 {
 	$char = mb_substr($str, $index, 1, 'UTF-8');
@@ -45,6 +46,7 @@ function utf8CharCodeAt($str, $index)
 		return null;
 	}
 }
+*/
 
 function unichr($u)
 {
@@ -53,8 +55,75 @@ function unichr($u)
 
 function encriptar(string $texto): string
 {
+	if (!is_string($texto) || empty($texto)) {
+		return '';
+	}
 	$chavePhp = obterChavePHP();
+	$mensx = '';
+	$j = 0;
+	$vetorAscii = [];
+	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
+	$ch = $chavePhp;
+	$lchavePhp = strlen($chavePhp);
+	$ldado = strlen($texto);
+	for ($i = 0; $i < $ldado; $i++) {
+		$j++;
+		$l = (Asc(substr($texto, $i, 1)) + (Asc(substr($ch, $j, 1))));
+		if ($j == $lchavePhp) {
+			$j = 1;
+		}
+		if ($l > 255) {
+			$l -= 256;
+		}
+		//var_dump($l);
+		echo "i: " . $i . " | " . "l: " . $l . " carater: " . $l . "<br>";
+		$mensx .= (chr($l));
+		echo $mensx . "<br>";
+		$asciisEncriptados[] = $l;
+		//$mensx += unichr((int)$l);
+	}
+	$mensx = implode(',', $asciisEncriptados);
+	return $mensx;
+}
 
+/**
+ * @param texto -> string com a lista dos código Ascci de cada caracter do texto já criptografado e separado por virgula.
+ */
+
+function descriptar(string $texto): string
+{
+	if (!is_string($texto) || empty($texto)) {
+		return '';
+	}
+	$chavePhp = obterChavePHP();
+	$listAscci = explode(',', $texto);
+	if (!is_array($listAscci)) {
+		return '';
+	}
+	$mensx = '';
+	$j = 0;
+	$ch = $chavePhp;
+	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
+	$lchavePhp = strlen($chavePhp);
+	$ldado = count($listAscci);
+	for ($i = 0; $i < $ldado; $i++) {
+		$j++;
+		$l = ((int)$listAscci[$i] - (Asc(substr($ch, $j, 1))));
+		if ($j == $lchavePhp) {
+			$j = 1;
+		}
+		if ($l < 0) {
+			$l += 256;
+		}
+		//echo "i: " . $i . " | " . "l: " . $l . " carater: " . chr($l) . "<br>";
+		$mensx .= (chr($l));
+	}
+	return $mensx;
+}
+
+function encriptar1(string $texto): string
+{
+	$chavePhp = obterChavePHP();
 	$mensx = '';
 	$l;
 	$i;
@@ -73,7 +142,7 @@ function encriptar(string $texto): string
 			$l -= 256;
 		}
 		var_dump($l);
-		echo "i: " . $i . " | " . "l: " . $l . " carater: " . unichr($l) . "<br>";
+		echo "i: " . $i . " | " . "l: " . $l . " carater: " . chr($l) . "<br>";
 		$mensx .= (chr($l));
 		echo $mensx . "<br>";
 		//$mensx += unichr((int)$l);
@@ -81,7 +150,7 @@ function encriptar(string $texto): string
 	return $mensx;
 }
 
-function descriptar(string $texto): string
+function descriptar1(string $texto): string
 {
 	$chavePhp = obterChavePHP();
 	$mensx = '';
@@ -89,6 +158,7 @@ function descriptar(string $texto): string
 	$i;
 	$j = 0;
 	$ch = $chavePhp;
+	//return $texto;
 	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
 	$lchavePhp = strlen($chavePhp);
 	$ldado = strlen($texto);
@@ -101,7 +171,8 @@ function descriptar(string $texto): string
 		if ($l < 0) {
 			$l += 256;
 		}
-		$mensx .= (unichr($l));
+		//echo "i: " . $i . " | " . "l: " . $l . " carater: " . chr($l) . "<br>";
+		$mensx .= (chr($l));
 	}
 	return $mensx;
 }
