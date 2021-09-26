@@ -92,6 +92,7 @@ function encriptar(string $texto): string
 
 function descriptar(string $texto): string
 {
+	//return $texto;
 	if (!is_string($texto) || empty($texto)) {
 		return '';
 	}

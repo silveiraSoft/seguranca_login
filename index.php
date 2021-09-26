@@ -1,6 +1,5 @@
 <?php
 
-//session_start();
 require_once "funcoes.php";
 ?>
 <!DOCTYPE html>
@@ -14,9 +13,6 @@ require_once "funcoes.php";
 </head>
 
 <body>
-    <!--
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-    -->
     <div>
         <?php
         criarChaveJSPHP();
@@ -28,15 +24,12 @@ require_once "funcoes.php";
         echo "<pre>";
         echo "desencriptado:" . descriptar($encriptado);
         require_once 'view.login.php';
-        //$variavelPhp = "<script>document.write(chavePhp)</script>" ?? '';
-        //$variavelPhp = "<script>sessionStorage.getItem('chavePhpsession')</script>" ?? '';
-        //echo 'Olá' . $variavelphp ?? '';
         ?>
     </div>
-      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  
     <script type="text/javascript" src="funcoes.js"></script>
     <script type="text/javascript" src="login.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </body>
 
 </html>
