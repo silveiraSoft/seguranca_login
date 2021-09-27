@@ -21,7 +21,7 @@ function criarChaveJSPHP()
 	if (isset($chavePhp)) {
 ?>
 		<script>
-			var chavePhp = '<?php echo $chavePhp ?? 'Erro na chave php'; ?>';
+			const chavePhp = '<?php echo $chavePhp ?? 'Erro na chave php'; ?>';
 			sessionStorage.setItem('chavePhpsession', chavePhp);
 			console.log("Chave js com o valor vindo da sessão do php com nome valor: chavePhp = " + chavePhp);
 		</script>
@@ -130,8 +130,6 @@ function encriptar1(string $texto): string
 {
 	$chavePhp = obterChavePHP();
 	$mensx = '';
-	$l;
-	$i;
 	$j = 0;
 	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
 	$ch = $chavePhp;
@@ -159,8 +157,6 @@ function descriptar1(string $texto): string
 {
 	$chavePhp = obterChavePHP();
 	$mensx = '';
-	$l;
-	$i;
 	$j = 0;
 	$ch = $chavePhp;
 	//return $texto;

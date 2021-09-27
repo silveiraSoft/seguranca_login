@@ -111,20 +111,19 @@ function encriptar1(texto) {
 	return mensx;
 }
 
-
-function mostrarDadoNormal(dado) {
-	console.log("Dado normal: " + dado);
+function mostrarDado(dado) {
+	console.log("Dado: " + dado);
 	return dado;
 }
 
 function mostrarDadoEncriptado(dado) {
 	const dadoEncriptado = encriptar(dado);
-	console.log("Dado original encriptado: " + dadoEncriptado);
+	console.log("Dado encriptado: " + dadoEncriptado);
 	return dadoEncriptado;
 }
 
 function mostrarDadoDescriptado(dado) {
 	const dadoOriginal = descriptar(dado);
-	console.log("Dado original desencriptado: " + dadoOriginal);
+	console.log("Dado desencriptado: " + dadoOriginal);
 	return dadoOriginal;
 }
