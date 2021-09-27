@@ -1,5 +1,7 @@
 <?php
 
+header('Content-type: application/json');
+ini_set('default_charset', 'utf-8');
 require_once 'funcoes.php';
 $senha = filter_input(INPUT_POST, 'dadoEncriptado', FILTER_SANITIZE_STRING);
 $dadoDescritadoAjax = descriptar($senha);

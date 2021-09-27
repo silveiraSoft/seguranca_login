@@ -1,5 +1,5 @@
 <?php
-
+ini_set('default_charset', 'utf-8');
 require_once "funcoes.php";
 ?>
 <!DOCTYPE html>

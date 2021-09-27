@@ -75,7 +75,6 @@ function encriptar(string $texto): string
 		if ($l > 255) {
 			$l -= 256;
 		}
-		//var_dump($l);
 		//echo "i: " . $i . " | " . "l: " . $l . " carater: " . $l . "<br>";
 		$mensx .= (chr($l));
 		//echo $mensx . "<br>";
@@ -92,7 +91,6 @@ function encriptar(string $texto): string
 
 function descriptar(string $texto): string
 {
-	//return $texto;
 	if (!is_string($texto) || empty($texto)) {
 		return '';
 	}
@@ -119,7 +117,6 @@ function descriptar(string $texto): string
 			$l += 256;
 		}
 
-		//return $l;
 		//echo "i: " . $i . " | " . "l: " . $l . " carater: " . chr($l) . "<br>";
 		$mensx .= (chr($l));
 	}
@@ -144,10 +141,9 @@ function encriptar1(string $texto): string
 		if ($l > 255) {
 			$l -= 256;
 		}
-		var_dump($l);
-		echo "i: " . $i . " | " . "l: " . $l . " carater: " . chr($l) . "<br>";
+		//echo "i: " . $i . " | " . "l: " . $l . " carater: " . chr($l) . "<br>";
 		$mensx .= (chr($l));
-		echo $mensx . "<br>";
+		//echo $mensx . "<br>";
 		//$mensx += unichr((int)$l);
 	}
 	return $mensx;
@@ -159,7 +155,6 @@ function descriptar1(string $texto): string
 	$mensx = '';
 	$j = 0;
 	$ch = $chavePhp;
-	//return $texto;
 	//ch = "assbdFbdpdPdpfPdAAdpeoseslsQQEcDDldiVVkadiedkdkLLnm";
 	$lchavePhp = strlen($chavePhp);
 	$ldado = strlen($texto);
